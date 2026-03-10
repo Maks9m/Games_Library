@@ -1,0 +1,30 @@
+<GameLibrary>
+  <Developers>
+    <Developer>
+      <Name></Name>
+      <Country></Country>
+    </Developer>
+  </Developers>
+  <Games>
+    <Game>
+      <Title></Title>
+      <Genre></Genre>
+      <Rating></Rating>
+      <Platform></Platform>
+    </Game>
+  </Games>
+  <Players>
+    <Player>
+      <Username></Username>
+      <Email></Email>
+      <FavoriteGame></FavoriteGame>
+    </Player>
+  </Players>
+  <Achievements>
+    <Achievement>
+      <Title></Title>
+      <Description></Description>
+      <GameTitle></GameTitle>
+    </Achievement>
+  </Achievements>
+</GameLibrary>
