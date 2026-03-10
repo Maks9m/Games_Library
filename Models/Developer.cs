@@ -1,12 +1,13 @@
-using System;
-using System.DateTime;
+using System.Xml.Serialization;
+
 namespace GameLibrary.Models
 {
     public class Developer
     {
+        [XmlAttribute("Id")]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Country { get; set; }
-        public DateTime FoundedDate { get; set; }
+        public string Name { get; set; } = "";
+        public string Country { get; set; } = "";
+        public int FoundedYear { get; set; }
     }
 }

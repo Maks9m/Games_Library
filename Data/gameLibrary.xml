@@ -1,0 +1,278 @@
+<GameLibrary>
+
+  <Developers>
+    <Developer Id="1">
+      <Name>CD Projekt Red</Name>
+      <Country>Poland</Country>
+      <FoundedYear>1994</FoundedYear>
+    </Developer>
+    <Developer Id="2">
+      <Name>Naughty Dog</Name>
+      <Country>USA</Country>
+      <FoundedYear>1984</FoundedYear>
+    </Developer>
+    <Developer Id="3">
+      <Name>FromSoftware</Name>
+      <Country>Japan</Country>
+      <FoundedYear>1986</FoundedYear>
+    </Developer>
+    <Developer Id="4">
+      <Name>Valve Corporation</Name>
+      <Country>USA</Country>
+      <FoundedYear>1996</FoundedYear>
+    </Developer>
+    <Developer Id="5">
+      <Name>Rockstar Games</Name>
+      <Country>USA</Country>
+      <FoundedYear>1998</FoundedYear>
+    </Developer>
+  </Developers>
+
+  <Games>
+    <!-- CD Projekt Red: two RPGs, one high-rated, one medium — for query 2 (devs with most high-rating games) -->
+    <Game Id="1" DeveloperId="1">
+      <Title>The Witcher 3: Wild Hunt</Title>
+      <Genre>RPG</Genre>
+      <Rating>9.8</Rating>
+      <ReleaseDate>2015-05-19</ReleaseDate>
+    </Game>
+    <Game Id="2" DeveloperId="1">
+      <Title>Cyberpunk 2077</Title>
+      <Genre>RPG</Genre>
+      <Rating>8.5</Rating>
+      <ReleaseDate>2020-12-10</ReleaseDate>
+    </Game>
+
+    <!-- Naughty Dog: Action/Adventure, both high-rated -->
+    <Game Id="3" DeveloperId="2">
+      <Title>The Last of Us</Title>
+      <Genre>Action/Adventure</Genre>
+      <Rating>9.5</Rating>
+      <ReleaseDate>2013-06-14</ReleaseDate>
+    </Game>
+    <Game Id="4" DeveloperId="2">
+      <Title>Uncharted 4</Title>
+      <Genre>Action/Adventure</Genre>
+      <Rating>9.1</Rating>
+      <ReleaseDate>2016-05-10</ReleaseDate>
+    </Game>
+
+    <!-- FromSoftware: two RPGs, both high-rated — should rank top in query 2 -->
+    <Game Id="5" DeveloperId="3">
+      <Title>Elden Ring</Title>
+      <Genre>RPG</Genre>
+      <Rating>9.7</Rating>
+      <ReleaseDate>2022-02-25</ReleaseDate>
+    </Game>
+    <Game Id="6" DeveloperId="3">
+      <Title>Dark Souls</Title>
+      <Genre>RPG</Genre>
+      <Rating>9.0</Rating>
+      <ReleaseDate>2011-09-22</ReleaseDate>
+    </Game>
+
+    <!-- Valve: FPS + Puzzle — genre diversity for query 4 -->
+    <Game Id="7" DeveloperId="4">
+      <Title>Half-Life 2</Title>
+      <Genre>FPS</Genre>
+      <Rating>9.6</Rating>
+      <ReleaseDate>2004-11-16</ReleaseDate>
+    </Game>
+    <Game Id="8" DeveloperId="4">
+      <Title>Portal 2</Title>
+      <Genre>Puzzle</Genre>
+      <Rating>9.5</Rating>
+      <ReleaseDate>2011-04-19</ReleaseDate>
+    </Game>
+
+    <!-- Rockstar: Action games, very high-rated -->
+    <Game Id="9" DeveloperId="5">
+      <Title>Grand Theft Auto V</Title>
+      <Genre>Action</Genre>
+      <Rating>9.7</Rating>
+      <ReleaseDate>2013-09-17</ReleaseDate>
+    </Game>
+    <Game Id="10" DeveloperId="5">
+      <Title>Red Dead Redemption 2</Title>
+      <Genre>Action/Adventure</Genre>
+      <Rating>9.8</Rating>
+      <ReleaseDate>2018-10-26</ReleaseDate>
+    </Game>
+  </Games>
+
+  <Players>
+    <!-- Registered before/after 2020-01-01 — for query 5 (registered after date + RPG access) -->
+    <Player Id="1">
+      <Username>dragonSlayer</Username>
+      <Email>dragonslayer@mail.com</Email>
+      <RegistrationDate>2020-01-15</RegistrationDate>
+      <GameIds>
+        <GameId>1</GameId>
+        <GameId>2</GameId>
+        <GameId>5</GameId>
+        <GameId>6</GameId>
+      </GameIds>
+    </Player>
+    <Player Id="2">
+      <Username>nightHawk</Username>
+      <Email>nighthawk@mail.com</Email>
+      <RegistrationDate>2019-06-20</RegistrationDate>
+      <GameIds>
+        <GameId>3</GameId>
+        <GameId>4</GameId>
+        <GameId>9</GameId>
+      </GameIds>
+    </Player>
+    <Player Id="3">
+      <Username>pixelWarrior</Username>
+      <Email>pixelwarrior@mail.com</Email>
+      <RegistrationDate>2021-03-10</RegistrationDate>
+      <GameIds>
+        <GameId>5</GameId>
+        <GameId>7</GameId>
+        <GameId>8</GameId>
+      </GameIds>
+    </Player>
+    <Player Id="4">
+      <Username>shadowHunter</Username>
+      <Email>shadowhunter@mail.com</Email>
+      <RegistrationDate>2018-11-05</RegistrationDate>
+      <GameIds>
+        <GameId>1</GameId>
+        <GameId>9</GameId>
+        <GameId>10</GameId>
+      </GameIds>
+    </Player>
+    <Player Id="5">
+      <Username>codeBreaker</Username>
+      <Email>codebreaker@mail.com</Email>
+      <RegistrationDate>2022-07-22</RegistrationDate>
+      <GameIds>
+        <GameId>2</GameId>
+        <GameId>5</GameId>
+      </GameIds>
+    </Player>
+    <Player Id="6">
+      <Username>starGazer</Username>
+      <Email>stargazer@mail.com</Email>
+      <RegistrationDate>2020-09-14</RegistrationDate>
+      <GameIds>
+        <GameId>3</GameId>
+        <GameId>7</GameId>
+        <GameId>8</GameId>
+      </GameIds>
+    </Player>
+    <Player Id="7">
+      <Username>ironForge</Username>
+      <Email>ironforge@mail.com</Email>
+      <RegistrationDate>2017-04-30</RegistrationDate>
+      <GameIds>
+        <GameId>6</GameId>
+        <GameId>9</GameId>
+        <GameId>10</GameId>
+      </GameIds>
+    </Player>
+    <Player Id="8">
+      <Username>techWizard</Username>
+      <Email>techwizard@mail.com</Email>
+      <RegistrationDate>2023-02-18</RegistrationDate>
+      <GameIds>
+        <GameId>1</GameId>
+        <GameId>2</GameId>
+        <GameId>3</GameId>
+      </GameIds>
+    </Player>
+  </Players>
+
+  <Achievements>
+    <!-- dragonSlayer (Id=1): 4 achievements — should rank high in query 1 -->
+    <Achievement Id="1" PlayerId="1" GameId="1">
+      <Title>First Blood</Title>
+      <Description>Win your first combat encounter.</Description>
+      <UnlockedDate>2024-01-10</UnlockedDate>
+    </Achievement>
+    <Achievement Id="2" PlayerId="1" GameId="5">
+      <Title>Dragon Slayer</Title>
+      <Description>Defeat a dragon boss without taking damage.</Description>
+      <UnlockedDate>2024-03-15</UnlockedDate>
+    </Achievement>
+    <Achievement Id="3" PlayerId="1" GameId="2">
+      <Title>Night City Legend</Title>
+      <Description>Complete all main story missions.</Description>
+      <UnlockedDate>2025-05-12</UnlockedDate>
+    </Achievement>
+    <Achievement Id="4" PlayerId="1" GameId="6">
+      <Title>Veteran</Title>
+      <Description>Reach level 50.</Description>
+      <UnlockedDate>2025-07-08</UnlockedDate>
+    </Achievement>
+
+    <!-- nightHawk (Id=2): 2 achievements -->
+    <Achievement Id="5" PlayerId="2" GameId="3">
+      <Title>Survivor</Title>
+      <Description>Complete the game on Survivor difficulty.</Description>
+      <UnlockedDate>2023-12-05</UnlockedDate>
+    </Achievement>
+    <Achievement Id="6" PlayerId="2" GameId="9">
+      <Title>Millionaire</Title>
+      <Description>Accumulate $1,000,000 in-game currency.</Description>
+      <UnlockedDate>2025-09-20</UnlockedDate>
+    </Achievement>
+
+    <!-- pixelWarrior (Id=3): 3 achievements -->
+    <Achievement Id="7" PlayerId="3" GameId="7">
+      <Title>Speed Runner</Title>
+      <Description>Finish the game in under 3 hours.</Description>
+      <UnlockedDate>2025-05-22</UnlockedDate>
+    </Achievement>
+    <Achievement Id="8" PlayerId="3" GameId="8">
+      <Title>Thinking With Portals</Title>
+      <Description>Solve all test chambers without hints.</Description>
+      <UnlockedDate>2025-10-14</UnlockedDate>
+    </Achievement>
+    <Achievement Id="9" PlayerId="3" GameId="5">
+      <Title>Elden Lord</Title>
+      <Description>Achieve the best ending.</Description>
+      <UnlockedDate>2025-11-30</UnlockedDate>
+    </Achievement>
+
+    <!-- shadowHunter (Id=4): 2 achievements -->
+    <Achievement Id="10" PlayerId="4" GameId="10">
+      <Title>Untouchable</Title>
+      <Description>Complete a mission without being spotted.</Description>
+      <UnlockedDate>2022-05-18</UnlockedDate>
+    </Achievement>
+    <Achievement Id="11" PlayerId="4" GameId="1">
+      <Title>Gwent Master</Title>
+      <Description>Win 100 games of Gwent.</Description>
+      <UnlockedDate>2025-08-03</UnlockedDate>
+    </Achievement>
+
+    <!-- codeBreaker (Id=5): 2 achievements -->
+    <Achievement Id="12" PlayerId="5" GameId="2">
+      <Title>Netrunner</Title>
+      <Description>Hack 50 enemy systems.</Description>
+      <UnlockedDate>2025-06-25</UnlockedDate>
+    </Achievement>
+    <Achievement Id="13" PlayerId="5" GameId="5">
+      <Title>Champion of the Roundtable</Title>
+      <Description>Defeat all demigod bosses.</Description>
+      <UnlockedDate>2025-12-01</UnlockedDate>
+    </Achievement>
+
+    <!-- starGazer (Id=6): 1 achievement -->
+    <Achievement Id="14" PlayerId="6" GameId="7">
+      <Title>Combine Crusher</Title>
+      <Description>Defeat 200 Combine soldiers.</Description>
+      <UnlockedDate>2023-07-11</UnlockedDate>
+    </Achievement>
+
+    <!-- techWizard (Id=8): 1 achievement -->
+    <Achievement Id="15" PlayerId="8" GameId="1">
+      <Title>Rising Star</Title>
+      <Description>Complete the prologue and enter the open world.</Description>
+      <UnlockedDate>2025-10-05</UnlockedDate>
+    </Achievement>
+  </Achievements>
+
+</GameLibrary>
