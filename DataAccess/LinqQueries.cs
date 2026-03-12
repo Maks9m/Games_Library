@@ -11,7 +11,7 @@ namespace GameLibrary.DataAccess
         XDocument _xmlDoc = XDocument.Load(xmlFilePath);
 
         // 1. Гравці з найбільшою кількістю досягнень + середня кількість досягнень на гру
-        public void GetPlayersWithMostAchievements()
+        public IEnumerable<(string Username, int AchievementCount)> GetPlayersWithMostAchievements()
         {
             int gameCount = _xmlDoc.Descendants("Game").Count();
             double avgPerGame = gameCount > 0
@@ -24,21 +24,15 @@ namespace GameLibrary.DataAccess
 
             var rankings = _xmlDoc.Descendants("Player")
                 .Select(p => (
-                    Username: p.Element("Username")?.Value,
+                    Username: p.Element("Username")?.Value ?? "Unknown",
                     AchievementCount: countByPlayer.GetValueOrDefault(p.Attribute("Id")?.Value ?? "", 0)
                 ))
                 .OrderByDescending(x => x.AchievementCount);
-
-            Console.WriteLine($"Average achievements per game: {avgPerGame:F2}");
-            Console.WriteLine("Players ranked by achievement count:");
-            foreach (var (username, count) in rankings)
-            {
-                Console.WriteLine($"  {username}: {count} achievements");
-            }
+            return rankings;
         }
 
         // 2. Розробники з найбільшою кількістю ігор з високим рейтингом (≥ 8.0)
-        public void GetDevelopersWithMostHighRatedGames()
+        public IEnumerable<(string DeveloperName, int Count)> GetDevelopersWithMostHighRatedGames()
         {
             var highRatedByDev = _xmlDoc.Descendants("Game")
                 .Where(g => double.TryParse(g.Element("Rating")?.Value, out var r) && r >= 8.0)
@@ -49,16 +43,11 @@ namespace GameLibrary.DataAccess
             var devNames = _xmlDoc.Descendants("Developer")
                 .ToDictionary(d => d.Attribute("Id")?.Value ?? "", d => d.Element("Name")?.Value ?? "Unknown");
 
-            Console.WriteLine("Developers ranked by high-rated games (Rating >= 8.0):");
-            foreach (var (devId, count) in highRatedByDev)
-            {
-                string name = devNames.GetValueOrDefault(devId, "Unknown");
-                Console.WriteLine($"  {name}: {count} high-rated games");
-            }
+			return highRatedByDev.Select(x => (DeveloperName: devNames.GetValueOrDefault(x.DeveloperId, "Unknown"), Count: x.Count));
         }
 
         // 3. Топ-5 ігор за рейтингом з іменем розробника
-        public void GetTop5GamesByRating()
+        public IEnumerable<(string Title, string Rating, string Developer)> GetTop5GamesByRating()
         {
             var devNames = _xmlDoc.Descendants("Developer")
                 .ToDictionary(d => d.Attribute("Id")?.Value ?? "", d => d.Element("Name")?.Value ?? "Unknown");
@@ -67,23 +56,19 @@ namespace GameLibrary.DataAccess
                 .OrderByDescending(g => double.TryParse(g.Element("Rating")?.Value, out var r) ? r : 0)
                 .Take(5)
                 .Select(g => (
-                    Title: g.Element("Title")?.Value,
-                    Rating: g.Element("Rating")?.Value,
+                    Title: g.Element("Title")?.Value ?? "Unknown",
+                    Rating: g.Element("Rating")?.Value ?? "0",
                     Developer: devNames.GetValueOrDefault(g.Attribute("DeveloperId")?.Value ?? "", "Unknown")
                 ));
 
-            Console.WriteLine("Top 5 games by rating:");
-            foreach (var (title, rating, developer) in top5)
-            {
-                Console.WriteLine($"  {title} (Rating: {rating}) — {developer}");
-            }
+            return top5;
         }
 
         // 4. Список жанрів з кількістю ігор та середнім рейтингом
-        public void GetGenreStatistics()
+        public IEnumerable<(string Genre, int Count, double AvgRating)> GetGenreStatistics()
         {
             var genres = _xmlDoc.Descendants("Game")
-                .GroupBy(g => g.Element("Genre")?.Value)
+                .GroupBy(g => g.Element("Genre")?.Value ?? "Unknown")
                 .Select(grp => (
                     Genre: grp.Key,
                     Count: grp.Count(),
@@ -91,15 +76,11 @@ namespace GameLibrary.DataAccess
                 ))
                 .OrderByDescending(x => x.Count);
 
-            Console.WriteLine("Genre statistics:");
-            foreach (var (genre, count, avgRating) in genres)
-            {
-                Console.WriteLine($"  {genre}: {count} games, avg rating {avgRating:F2}");
-            }
+			return genres;
         }
 
         // 5. Гравці, зареєстровані після дати, що мають доступ до ігор жанру "RPG"
-        public void GetRecentPlayersWithRpgGames(DateTime afterDate)
+        public IEnumerable<(string Username, string RegistrationDate, int RpgCount)> GetRecentPlayersWithRpgGames(DateTime afterDate)
         {
             var rpgGameIds = _xmlDoc.Descendants("Game")
                 .Where(g => g.Element("Genre")?.Value == "RPG")
@@ -111,21 +92,17 @@ namespace GameLibrary.DataAccess
                 .Where(p => p.Element("GameIds")?.Elements("GameId")
                     .Any(gid => rpgGameIds.Contains(gid.Value)) == true)
                 .Select(p => (
-                    Username: p.Element("Username")?.Value,
-                    RegistrationDate: p.Element("RegistrationDate")?.Value,
+                    Username: p.Element("Username")?.Value ?? "Unknown",
+                    RegistrationDate: p.Element("RegistrationDate")?.Value ?? "",
                     RpgCount: p.Element("GameIds")?.Elements("GameId")
                         .Count(gid => rpgGameIds.Contains(gid.Value)) ?? 0
                 ));
 
-            Console.WriteLine($"Players registered after {afterDate:yyyy-MM-dd} with RPG games:");
-            foreach (var (username, regDate, rpgCount) in players)
-            {
-                Console.WriteLine($"  {username} (registered {regDate}): {rpgCount} RPG games");
-            }
+            return players;
         }
 
         // 6. Досягнення за останній рік, згруповані за грою
-        public void GetRecentAchievementsByGame()
+        public IEnumerable<(string GameTitle, int Count)> GetRecentAchievementsByGame()
         {
             DateTime oneYearAgo = DateTime.Now.AddYears(-1);
 
@@ -136,16 +113,12 @@ namespace GameLibrary.DataAccess
                 .Where(a => DateTime.TryParse(a.Element("UnlockedDate")?.Value, out var date) && date > oneYearAgo)
                 .GroupBy(a => a.Attribute("GameId")?.Value ?? "")
                 .Select(grp => (
-                    GameTitle: gameNames.GetValueOrDefault(grp.Key, "Unknown"),
+                    GameTitle: gameNames.GetValueOrDefault(grp.Key, "Unknown") ?? "Unknown",
                     Count: grp.Count()
                 ))
                 .OrderByDescending(x => x.Count);
 
-            Console.WriteLine($"Achievements unlocked after {oneYearAgo:yyyy-MM-dd}, by game:");
-            foreach (var (gameTitle, count) in grouped)
-            {
-                Console.WriteLine($"  {gameTitle}: {count} achievements");
-            }
+            return grouped;
         }
     }
 }
