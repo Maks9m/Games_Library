@@ -15,17 +15,7 @@ namespace GameLibrary
             launcherCore.Start("./Data/settings.json");
             while (true)
             {
-                Console.WriteLine("\n=== Game Launcher Core ===");
-                Console.WriteLine("   1. Show Game Library");
-                Console.WriteLine("   2. Add Game");
-                Console.WriteLine("   3. Add Player");
-                Console.WriteLine("   4. Sort Games (Rating / Title / Release Date)");
-                Console.WriteLine("   5. Run LINQ Queries (1–6)");
-                Console.WriteLine("   6. Settings");
-                Console.WriteLine("   7. Top Players (Achievements)");
-                Console.WriteLine("   8. Top Developers (High Rated Games)");
-                Console.WriteLine("   0. Exit");
-
+                displayMenu();
                 Console.Write("Select an option: ");
                 var input = Console.ReadLine();
                 switch (input)
@@ -52,19 +42,12 @@ namespace GameLibrary
                         }
                         break;
                     case "5":
-                        Console.WriteLine("Enter query number (1-6):");
-                        Console.WriteLine("1. Players with most achievements + avg per game");
-                        Console.WriteLine("2. Developers with most high-rated games (>= 8.0)");
-                        Console.WriteLine("3. Top 5 games by rating with developer name");
-                        Console.WriteLine("4. Genre statistics (count + avg rating)");
-                        Console.WriteLine("5. Players registered > 2020 with RPG games");
-                        Console.WriteLine("6. Recent achievements grouped by game");
-
+                        displayQueryMenu();
                         if (int.TryParse(Console.ReadLine(), out int queryId) && queryId >= 1 && queryId <= 6)
                         {
                             launcherCore.RunQuery(queryId);
                         }
-                        else 
+                        else
                         {
                             Console.WriteLine("Invalid query number.");
                         }
@@ -85,6 +68,31 @@ namespace GameLibrary
                         Console.WriteLine("Invalid option. Please try again.");
                         break;
                 }
+            }
+
+            void displayMenu()
+            {
+                Console.WriteLine("\n=== Game Launcher Core ===");
+                Console.WriteLine("   1. Show Game Library");
+                Console.WriteLine("   2. Add Game");
+                Console.WriteLine("   3. Add Player");
+                Console.WriteLine("   4. Sort Games (Rating / Title / Release Date)");
+                Console.WriteLine("   5. Run LINQ Queries (1–6)");
+                Console.WriteLine("   6. Settings");
+                Console.WriteLine("   7. Top Players (Achievements)");
+                Console.WriteLine("   8. Top Developers (High Rated Games)");
+                Console.WriteLine("   0. Exit");
+            }
+
+            void displayQueryMenu()
+            {
+                Console.WriteLine("Enter query number (1-6):");
+                Console.WriteLine("1. Players with most achievements + avg per game");
+                Console.WriteLine("2. Developers with most high-rated games (>= 8.0)");
+                Console.WriteLine("3. Top 5 games by rating with developer name");
+                Console.WriteLine("4. Genre statistics (count + avg rating)");
+                Console.WriteLine("5. Players registered > 2020 with RPG games");
+                Console.WriteLine("6. Recent achievements grouped by game");
             }
         }
     }
